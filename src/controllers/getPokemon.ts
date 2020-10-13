@@ -1,6 +1,6 @@
 import {getDatabase} from '../utils/dbConnection.ts'
 import { HTTPResponse, BadRequest, NotFound, Ok, StatusCode } from '../types/HTTPResponse.ts'
-import rowToPokemon from '../utils/rowToPokemon.ts'
+import Pokemon from '../types/Pokemon.ts'
 
 export default ({params,response}: {params: any, response: any}) => {
   try {
@@ -10,16 +10,12 @@ export default ({params,response}: {params: any, response: any}) => {
     }
 
     const db = getDatabase()
-    const rows = db.query('SELECT id,name,category,height,weight from pokemons WHERE id=?', id)
-    const row = rows.next()
-    rows.return()
+    const [pokemon]: Array<Pokemon> = [...db.query('SELECT id,name,category,height,weight from pokemons WHERE id=?', id).asObjects()]
 
-    if(!row.value){
+    if(!pokemon){
       throw NotFound('Pokemon not found')
     }
-
-    const pokemon = rowToPokemon(row.value)
-
+    
     response.body = Ok(pokemon)
     response.status = StatusCode.Ok
   }catch(e){

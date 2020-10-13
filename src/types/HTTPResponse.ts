@@ -31,7 +31,7 @@ export class HTTPResponse implements ResponseBody {
 }
 
 export const Ok = (data: any) => new  HTTPResponse({data, status: StatusCode.Ok, success: true})
-export const NoContent = () => new  HTTPResponse({status: StatusCode.NotFound, success: true})
+export const NoContent = () => new  HTTPResponse({status: StatusCode.NoContent, success: true})
 export const BadRequest = (message: string) => new  HTTPResponse({message, status: StatusCode.BadRequest, success: false})
 export const Unauthorized = (message: string) => new  HTTPResponse({message, status: StatusCode.Unauthorized, success: false})
 export const NotFound = (message: string) => new  HTTPResponse({message, status: StatusCode.NotFound, success: false})
