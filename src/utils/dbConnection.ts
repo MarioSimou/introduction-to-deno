@@ -6,7 +6,7 @@ export const initDatabase = (path: string) => {
   const options: SqliteOptions = {path}
   db = new SqliteDB(options)
 
-  const r = db.query(`
+  db.query(`
     CREATE TABLE IF NOT EXISTS pokemons(
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name text NOT NULL,
