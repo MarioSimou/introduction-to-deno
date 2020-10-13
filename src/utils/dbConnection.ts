@@ -1,4 +1,4 @@
-import SqliteDB, {SqliteOptions} from './SqliteDB.ts'
+import SqliteDB, {SqliteOptions} from '../types/SqliteDB.ts'
 
 let db: any
 
@@ -9,7 +9,7 @@ export const initDatabase = (path: string) => {
   db.query(`
     CREATE TABLE IF NOT EXISTS pokemons(
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name text NOT NULL,
+      name text NOT NULL UNIQUE,
       category text NOT NULL,
       height real NOT NULL,
       weight real NOT NULL
